@@ -27,7 +27,7 @@ echo "Time to set root pass."
 
 passwd
 
-pacman -Syu amd-ucode efibootmgr mtools dosfstools vim nvidia cowsay figlet toilet git grub os-prober networkmanager sudo
+pacman -Syu amd-ucode efibootmgr mtools dosfstools vim nvidia cowsay figlet toilet git grub os-prober networkmanager sudo wget
 
 useradd --create-home mia
 
