@@ -6,7 +6,7 @@ if ! ln -sf /usr/share/zoneinfo/Europe/Dublin /etc/localtime ; then echo "timezo
 
 hwclock --systohc
 
-locale-gen locale-gen en_US en_US.UTF-8 
+locale-gen en_US en_US.UTF-8 
 
 touch /etc/hostname
 echo foxxo >> /etc/hostname
@@ -27,7 +27,7 @@ echo "Time to set root pass."
 
 passwd
 
-pacman -Syu amd-ucode efibootmgr mtools dosfstools vim nvidia cowsay figlet toilet git grub os-prober networkmanager sudo wget
+pacman -Syu amd-ucode efibootmgr mtools dosfstools vim nvidia cowsay figlet git grub os-prober networkmanager sudo wget fontconfig nano 
 
 useradd --create-home mia
 
