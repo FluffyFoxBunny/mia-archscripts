@@ -27,11 +27,11 @@ echo "Time to set root pass."
 
 passwd
 
-pacman -Syu amd-ucode efibootmgr mtools dosfstools vim nvidia cowsay figlet git grub os-prober networkmanager sudo wget fontconfig nano 
+echo "Alright. time to install packages. "
+
+pacman -S $(awk '{print $1}'  list.txt)
 
 useradd --create-home mia
-
-
 usermod --append --groups wheel,audio,video,optical,storage mia
 passwd mia
 
@@ -41,10 +41,12 @@ visudo
 
 echo "grub it up!"
 mkdir /boot/efi
-if ! mount /dev/nvme0n1p1 /mnt/boot/efi ; then echo "mounting efi is fucked" && exit 1 ; fi
+if ! mount /dev/nvme0n1p1 /mnt/boot/efi/ ; then echo "mounting efi is fucked" && exit 1 ; fi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB_UEFI --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
-vim /etc/vconsole.conf
+
+echo "FONT=ter-p24n
+FONT_MAP=8859-2" >> /etc/vconsole.conf
 
 echo "all done. you SHOULD be able to reboot now."
 

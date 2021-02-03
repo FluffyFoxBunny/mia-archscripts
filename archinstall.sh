@@ -2,6 +2,8 @@
 
 #FUCK IM LAZY THIS DOES IT FOR ME
 
+pacman -S wget git
+
 echo "
 Listen bitch, read the file first,
 don't FUCK THIS UP
@@ -25,6 +27,8 @@ fi
 echo "YOUVE BEEN WARNED"
 
 
+
+
 #============================================================
 
 echo "first my main disk"
@@ -40,11 +44,7 @@ echo "i guess maybe if that worked we're ok?"
 
 #====================================================
 
-echo "
-We're mounting now
-"
-
-
+echo "We're mounting now"
 
 if ! mount /dev/nvme0n1p4 /mnt ; then echo "mounting nvme0n1p4 is fucked" && exit 1 ; fi
 
@@ -52,16 +52,10 @@ echo "We're mounted. let's download"
 if ! pacstrap /mnt base linux linux-firmware ; then echo "install is fucked" && exit 1 ; fi
 
 echo "Assuming the arch install didn't shit the bed, we can now gen our fstab"
-
-
 if ! genfstab -U /mnt >> /mnt/etc/fstab ; then echo "genfstab is fucked" && exit 1 ; fi
 
-#============================================================
-
 cd /mnt/etc/ || exit
-
-
-if ! wget https://violetvulpine.net/fuck/archinstall2.sh ; then echo "wget is fucked" && exit 1 ; fi
+if ! git clone https://github.com/xenolithcluster/mia-archscripts.git ; then echo "git is fucked" ; fi
 
 echo "bitch it's kinda nearly there! 
-do arch-chroot /mnt then start part two, i put the file in /etc/"
+do arch-chroot /mnt then start archinstall2.sh, i put the files in /etc/mia-archscripts"
