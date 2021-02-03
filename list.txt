@@ -3,6 +3,7 @@ efibootmgr
 mtools
 dosfstools
 vim
+vi
 nvidia
 cowsay
 figlet
