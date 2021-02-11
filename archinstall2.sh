@@ -7,6 +7,7 @@ if ! ln -sf /usr/share/zoneinfo/Europe/Dublin /etc/localtime ; then echo "timezo
 hwclock --systohc
 
 locale-gen en_US en_US.UTF-8 
+localectl set-locale LANG=en_US.UTF-8
 
 touch /etc/hostname
 echo foxxo >> /etc/hostname
@@ -15,7 +16,7 @@ echo "
 
 127.0.0.1  localhost
 ::1  localhost
-127.0.1.1  foxxo.localdomain  myhostname
+127.0.1.1  foxxo.localdomain  foxxo
 
 " >> /etc/hosts
 
@@ -40,7 +41,7 @@ visudo
 
 
 echo "grub it up!"
-mkdir /boot/efi
+mkdir -p /boot/efi
 if ! mount /dev/nvme0n1p1 /mnt/boot/efi/ ; then echo "mounting efi is fucked" && exit 1 ; fi
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB_UEFI --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
