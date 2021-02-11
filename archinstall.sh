@@ -35,8 +35,8 @@ echo "first my main disk"
 if ! mkfs.ext4 /dev/nvme0n1p4 ; then echo "mkfs.ext4 is fucked" && exit 1 ; fi
 
 echo "swap shit idk why."
-if ! mkswap /dev/sdb3 ; then echo "mkswap is fucked" && exit 1 ; fi
-if ! swapon /dev/sdb3 ; then echo "swapons fucked" && exit 1 ; fi
+if ! mkswap /dev/sda2 ; then echo "mkswap is fucked" && exit 1 ; fi
+if ! swapon /dev/sda2 ; then echo "swapons fucked" && exit 1 ; fi
 
 echo "i guess maybe if that worked we're ok?"
 
