@@ -49,7 +49,7 @@ echo "We're mounting now"
 if ! mount /dev/nvme0n1p4 /mnt ; then echo "mounting nvme0n1p4 is fucked" && exit 1 ; fi
 
 echo "We're mounted. let's download"
-if ! pacstrap /mnt base linux linux-firmware ; then echo "install is fucked" && exit 1 ; fi
+if ! pacstrap /mnt base base-devel linux Linux-firmware nvidia ; then echo "install is fucked" && exit 1 ; fi
 
 echo "Assuming the arch install didn't shit the bed, we can now gen our fstab"
 if ! genfstab -U /mnt >> /mnt/etc/fstab ; then echo "genfstab is fucked" && exit 1 ; fi
