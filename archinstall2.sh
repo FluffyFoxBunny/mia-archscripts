@@ -49,5 +49,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo "FONT=ter-p24n
 FONT_MAP=8859-2" >> /etc/vconsole.conf
 
+systemctl enable NetworkManager
+
 echo "all done. you SHOULD be able to reboot now."
 
