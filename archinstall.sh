@@ -49,13 +49,13 @@ echo "We're mounting now"
 if ! mount /dev/nvme0n1p4 /mnt ; then echo "mounting nvme0n1p4 is fucked" && exit 1 ; fi
 
 echo "We're mounted. let's download"
-if ! pacstrap /mnt base base-devel linux Linux-firmware nvidia ; then echo "install is fucked" && exit 1 ; fi
+if ! pacstrap /mnt base base-devel linux linux-firmware nvidia ; then echo "install is fucked" && exit 1 ; fi
 
 echo "Assuming the arch install didn't shit the bed, we can now gen our fstab"
 if ! genfstab -U /mnt >> /mnt/etc/fstab ; then echo "genfstab is fucked" && exit 1 ; fi
 
 cd /mnt/etc/ || exit
-if ! git clone https://github.com/xenolithcluster/mia-archscripts.git ; then echo "git is fucked" ; fi
+if ! git clone https://github.com/violetvulpine/mia-archscripts.git ; then echo "git is fucked" ; fi
 
 echo "bitch it's kinda nearly there! 
 do arch-chroot /mnt then start archinstall2.sh, i put the files in /etc/mia-archscripts"
