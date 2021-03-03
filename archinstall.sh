@@ -2,11 +2,20 @@
 
 #FUCK IM LAZY THIS DOES IT FOR ME
 
+#Swap partition 
+SW=/dev/sda1
+#Main partition 
+MP=/dev/nvme0n1p2
+
 pacman -S wget git
+
 
 echo "
 Listen bitch, read the file first,
 don't FUCK THIS UP
+
+Install disk: $MP 
+Swap: $SW 
 
 make sure you have the partable done, do that
 thing with the numbers and shit. 
@@ -32,11 +41,11 @@ echo "YOUVE BEEN WARNED"
 #============================================================
 
 echo "first my main disk"
-if ! mkfs.ext4 /dev/nvme0n1p4 ; then echo "mkfs.ext4 is fucked" && exit 1 ; fi
+if ! mkfs.ext4 $MP ; then echo "mkfs.ext4 is fucked" && exit 1 ; fi
 
 echo "swap shit idk why."
-if ! mkswap /dev/sda1 ; then echo "mkswap is fucked" && exit 1 ; fi
-if ! swapon /dev/sda1 ; then echo "swapons fucked" && exit 1 ; fi
+if ! mkswap $SW ; then echo "mkswap is fucked" && exit 1 ; fi
+if ! swapon $SW ; then echo "swapons fucked" && exit 1 ; fi
 
 echo "i guess maybe if that worked we're ok?"
 
@@ -46,7 +55,7 @@ echo "i guess maybe if that worked we're ok?"
 
 echo "We're mounting now"
 
-if ! mount /dev/nvme0n1p4 /mnt ; then echo "mounting nvme0n1p4 is fucked" && exit 1 ; fi
+if ! mount $MP /mnt ; then echo "mounting $MP is fucked" && exit 1 ; fi
 
 echo "We're mounted. let's download"
 if ! pacstrap /mnt base base-devel linux linux-firmware linux-headers nvidia ; then echo "install is fucked" && exit 1 ; fi
@@ -57,5 +66,8 @@ if ! genfstab -U /mnt >> /mnt/etc/fstab ; then echo "genfstab is fucked" && exit
 cd /mnt/etc/ || exit
 if ! git clone https://github.com/violetvulpine/mia-archscripts.git ; then echo "git is fucked" ; fi
 
+chmod +x /mnt/etc/mia-archscripts/*
+
 echo "bitch it's kinda nearly there! 
-do arch-chroot /mnt then start archinstall2.sh, i put the files in /etc/mia-archscripts"
+do arch-chroot /mnt then start /etc/mia-archscripts/archinstall2.sh
+i chmodded them and all!"
