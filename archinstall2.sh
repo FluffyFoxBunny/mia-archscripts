@@ -30,7 +30,7 @@ passwd
 
 echo "Alright. time to install packages. "
 
-pacman -S $(awk '{print $1}'  list.txt)
+pacman -S $(awk '{print $1}'  /etc/mia-archscripts/list.txt)
 
 useradd --create-home mia
 usermod --append --groups wheel,audio,video,optical,storage mia
@@ -42,9 +42,11 @@ visudo
 
 echo "grub it up!"
 mkdir -p /boot/efi
-if ! mount /dev/nvme0n1p1 /boot/efi/ ; then echo "mounting efi is fucked" && exit 1 ; fi
+mount /dev/nvme0n1p1 /boot/efi/
 grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB_UEFI --recheck
 grub-mkconfig -o /boot/grub/grub.cfg
+os-prober
+
 
 echo "FONT=ter-p24n
 FONT_MAP=8859-2" >> /etc/vconsole.conf
