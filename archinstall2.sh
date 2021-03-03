@@ -38,7 +38,8 @@ passwd
 echo "Alright. time to install packages. "
 
 pacman -S $(awk '{print $1}'  /etc/mia-archscripts/list.txt)
-export EDITOR=/usr/bin/nano
+export EDITOR=nano
+export VISUAL=nano
 useradd --create-home mia
 usermod --append --groups wheel,audio,video,optical,storage mia
 passwd mia
