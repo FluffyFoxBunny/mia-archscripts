@@ -2,6 +2,7 @@ amd-ucode
 efibootmgr
 mtools
 dosfstools
+ntfs-3g
 vim
 vi
 nvidia
